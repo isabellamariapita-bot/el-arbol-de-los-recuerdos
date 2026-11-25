@@ -132,6 +132,30 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .reflection input{flex:1;min-width:220px;border:2px solid #dce6d7;border-radius:14px;padding:13px;font:inherit}
 .reflection input:focus-visible{outline:none;border-color:var(--forest)}
 
+/* ===== Juego de memoria ===== */
+.game-section{background:linear-gradient(180deg,#e7ecd6,#f3ead8)}
+.game-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}
+.game-stat{background:#fffdf7;border:1px solid #ece0ca;border-radius:999px;padding:9px 16px;font-weight:700;color:var(--teja);font-family:var(--font-head)}
+.game-stat b{color:var(--deep)}
+.level-group{display:inline-flex;background:#fffdf7;border:1px solid #ece0ca;border-radius:999px;padding:4px;gap:4px}
+.level-btn{border:0;background:transparent;border-radius:999px;padding:8px 15px;font-weight:700;font-family:var(--font-head);color:var(--muted);cursor:pointer}
+.level-btn.active{background:linear-gradient(135deg,var(--terra),var(--teja));color:#fff}
+.level-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.board{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);max-width:560px}
+.board.lv-normal{grid-template-columns:repeat(4,1fr)}
+.memory-card{position:relative;aspect-ratio:1;border:0;background:transparent;cursor:pointer;perspective:700px;padding:0}
+.memory-card:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:16px}
+.card-inner{position:absolute;inset:0;transition:transform .45s ease;transform-style:preserve-3d}
+.memory-card.flipped .card-inner,.memory-card.matched .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;display:grid;place-items:center;border-radius:16px;backface-visibility:hidden;box-shadow:var(--shadow);font-size:clamp(1.8rem,6vw,2.6rem)}
+.card-front{background:linear-gradient(145deg,#8fb56a,#5f8a4e);color:#eef6ea;border:3px solid #ffffff55}
+.card-back{background:#fffdf7;border:3px solid #e6d7bd;transform:rotateY(180deg)}
+.memory-card.matched .card-back{background:var(--ok-bg);border-color:var(--ok);animation:pop .4s ease}
+@keyframes pop{0%{transform:rotateY(180deg) scale(1)}50%{transform:rotateY(180deg) scale(1.12)}100%{transform:rotateY(180deg) scale(1)}}
+.game-msg{min-height:30px;margin:16px 0 0;font-weight:700;color:var(--forest);font-family:var(--font-head);font-size:1.05rem}
+.game-win{background:#fffdf7;border:1px solid #ece0ca;border-left:6px solid var(--gold);border-radius:var(--radius);padding:18px 22px;margin-top:16px;display:none}
+.game-win.show{display:block;animation:bob .6s ease}
+
 .podcast-section{background:linear-gradient(180deg,#f3ead8,#e7ecd6)}
 .podcast{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center;background:#fffdf7;border:1px solid #ece0ca;border-left:6px solid var(--gold);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);max-width:820px}
 .podcast-cover{width:120px;height:120px;border-radius:20px;background:linear-gradient(145deg,#8fb56a,#e0a53e);display:grid;place-items:center;font-size:3.2rem;box-shadow:inset 0 -14px 24px #7a6a3e33}
@@ -157,6 +181,7 @@ footer a{color:#f6cf7e}
  .section{padding:48px 18px}.big-tree{min-height:230px}.big-tree span{font-size:9rem}
  .podcast{grid-template-columns:1fr;text-align:center;justify-items:center}
  .podcast .controls{justify-content:center}
+ .board,.board.lv-normal{grid-template-columns:repeat(3,1fr)}
 }
 /* Aparición suave al entrar en pantalla */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
@@ -179,6 +204,7 @@ footer a{color:#f6cf7e}
    <a href="#arbol">Árbol de recuerdos</a>
    <a href="#actividad">Actividad</a>
    <a href="#decisiones-kiti">Decisiones</a>
+   <a href="#juego">Juego</a>
    <a href="#podcast">Podcast</a>
    <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true" title="Activar o silenciar los sonidos">
      <span id="sound-icon">🔊</span><span id="sound-label">Sonido</span>
@@ -313,6 +339,30 @@ footer a{color:#f6cf7e}
    <button class="choice decision" data-correct="true">C. Organizarse para limpiar y cuidar el espacio entre todos.</button>
   </div>
   <p class="feedback decision-feedback" aria-live="polite"></p>
+ </div>
+</section>
+
+<section class="section game-section" id="juego">
+ <div class="section-head"><div class="eyebrow">08 · Juega y recuerda</div><h2>Siembra tus recuerdos</h2><p>Un juego de memoria: voltea las cartas y encuentra las parejas de semillas. Cada pareja que siembres te recordará un valor de la comunidad. ¡Encuéntralas todas!</p></div>
+
+ <div class="game-bar">
+  <div class="level-group" role="group" aria-label="Elegir nivel">
+   <button class="level-btn active" type="button" data-level="easy" aria-pressed="true">Fácil (4 parejas)</button>
+   <button class="level-btn" type="button" data-level="normal" aria-pressed="false">Normal (6 parejas)</button>
+  </div>
+  <span class="game-stat">Movimientos: <b id="game-moves">0</b></span>
+  <span class="game-stat">Parejas: <b id="game-pairs">0</b></span>
+  <span class="game-stat">Tiempo: <b id="game-time">0s</b></span>
+  <button class="btn secondary" id="game-reset" type="button">🔄 Reiniciar</button>
+ </div>
+
+ <div class="board lv-easy" id="game-board" aria-label="Tablero del juego de memoria"></div>
+
+ <p class="game-msg" id="game-msg" aria-live="polite">Toca una carta para comenzar a sembrar.</p>
+
+ <div class="game-win" id="game-win" aria-live="polite">
+  <h3 style="margin:0 0 6px;color:var(--teja);font-family:var(--font-head)">🌳 ¡Sembraste todos los recuerdos!</h3>
+  <p style="margin:0;color:var(--muted)" id="game-win-text"></p>
  </div>
 </section>
 
@@ -509,6 +559,120 @@ document.querySelectorAll('#decisiones-kiti .quiz').forEach(quiz=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
  },{threshold:.12});
  items.forEach(el=>io.observe(el));
+})();
+
+/* ===== Juego de memoria "Siembra tus recuerdos" ===== */
+(function(){
+ const board=document.getElementById('game-board');
+ if(!board) return;
+ const movesEl=document.getElementById('game-moves');
+ const pairsEl=document.getElementById('game-pairs');
+ const timeEl=document.getElementById('game-time');
+ const msgEl=document.getElementById('game-msg');
+ const winEl=document.getElementById('game-win');
+ const winText=document.getElementById('game-win-text');
+ const resetBtn=document.getElementById('game-reset');
+ const levelBtns=document.querySelectorAll('.level-btn');
+
+ // Semillas/símbolos con su valor (mensaje al emparejar)
+ const DECK=[
+  {e:'🌰',v:'Memoria: escuchar y recordar las historias.'},
+  {e:'🌻',v:'Comunidad: cuidar los lugares que compartimos.'},
+  {e:'🍃',v:'Respeto: escuchar y valorar a los demás.'},
+  {e:'🌼',v:'Paz: construir juntos un futuro mejor.'},
+  {e:'🎵',v:'La flauta de Kiti: la música que une al pueblo.'},
+  {e:'🌳',v:'El árbol de los recuerdos: raíces que nos sostienen.'}
+ ];
+
+ let level='easy';           // easy=4 parejas, normal=6 parejas
+ let first=null, lock=false;
+ let moves=0, pairs=0, totalPairs=4;
+ let seconds=0, timer=null, started=false;
+
+ function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+
+ function startTimer(){
+  if(started) return; started=true;
+  timer=setInterval(()=>{seconds++;timeEl.textContent=seconds+'s';},1000);
+ }
+ function stopTimer(){clearInterval(timer);timer=null;}
+
+ function build(){
+  stopTimer();
+  totalPairs=level==='easy'?4:6;
+  moves=0;pairs=0;seconds=0;first=null;lock=false;started=false;
+  movesEl.textContent='0';pairsEl.textContent='0';timeEl.textContent='0s';
+  msgEl.textContent='Toca una carta para comenzar a sembrar.';
+  winEl.classList.remove('show');
+  board.classList.toggle('lv-normal',level==='normal');
+  board.classList.toggle('lv-easy',level==='easy');
+
+  const chosen=DECK.slice(0,totalPairs);
+  const cards=shuffle(chosen.concat(chosen.map(c=>({...c}))));
+  board.innerHTML='';
+  cards.forEach((card,i)=>{
+   const btn=document.createElement('button');
+   btn.type='button';
+   btn.className='memory-card';
+   btn.setAttribute('aria-label','Carta oculta');
+   btn.dataset.emoji=card.e;
+   btn.dataset.value=card.v;
+   btn.innerHTML='<span class="card-inner">'
+     +'<span class="card-face card-front" aria-hidden="true">🌱</span>'
+     +'<span class="card-face card-back">'+card.e+'</span>'
+     +'</span>';
+   btn.addEventListener('click',()=>flip(btn));
+   board.appendChild(btn);
+  });
+ }
+
+ function flip(btn){
+  if(lock||btn.classList.contains('flipped')||btn.classList.contains('matched')) return;
+  startTimer();
+  btn.classList.add('flipped');
+  btn.setAttribute('aria-label',btn.dataset.emoji);
+  if(!first){first=btn;return;}
+  // segunda carta
+  moves++;movesEl.textContent=moves;
+  if(first.dataset.emoji===btn.dataset.emoji){
+   first.classList.add('matched');btn.classList.add('matched');
+   pairs++;pairsEl.textContent=pairs;
+   msgEl.textContent='🌱 '+btn.dataset.value;
+   if(window.Sound) Sound.success();
+   first=null;
+   if(pairs===totalPairs) win();
+  }else{
+   lock=true;
+   if(window.Sound) Sound.error();
+   const a=first,b=btn;
+   setTimeout(()=>{
+    a.classList.remove('flipped');b.classList.remove('flipped');
+    a.setAttribute('aria-label','Carta oculta');b.setAttribute('aria-label','Carta oculta');
+    first=null;lock=false;
+   },800);
+  }
+ }
+
+ function win(){
+  stopTimer();
+  winText.textContent='Encontraste las '+totalPairs+' parejas en '+moves+' movimientos y '+seconds+' segundos. ¡Cada recuerdo sembrado hace crecer la comunidad!';
+  winEl.classList.add('show');
+  msgEl.textContent='¡Lo lograste! 🌼';
+  if(window.Sound){Sound.success();setTimeout(()=>Sound.save(),400);}
+ }
+
+ levelBtns.forEach(b=>{
+  b.addEventListener('click',()=>{
+   levelBtns.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false');});
+   b.classList.add('active');b.setAttribute('aria-pressed','true');
+   level=b.dataset.level;
+   if(window.Sound) Sound.tap();
+   build();
+  });
+ });
+ resetBtn.addEventListener('click',()=>{if(window.Sound) Sound.tap();build();});
+
+ build();
 })();
 </script>
 </body>
