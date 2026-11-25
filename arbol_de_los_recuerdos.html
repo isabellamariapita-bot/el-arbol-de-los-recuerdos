@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#315b46">
+<title>El árbol de los recuerdos | El Viaje de las Semillas</title>
+<style>
+:root{
+ --forest:#315b46;--deep:#234333;--leaf:#6f9367;--sage:#dce8d5;--cream:#fffaf0;
+ --paper:#f6f1e5;--gold:#e5b95d;--ink:#34443a;--muted:#657368;--coral:#d98570;
+ --shadow:0 14px 35px rgba(43,67,48,.12);--radius:24px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;line-height:1.55}
+button,a{font:inherit}
+a{color:var(--forest)}
+.skip{position:absolute;left:-999px;top:8px;background:white;padding:10px;z-index:10}.skip:focus{left:8px}
+header{background:linear-gradient(120deg,#244b39,#527b58);color:#fff;padding:18px clamp(18px,5vw,70px);position:sticky;top:0;z-index:5;box-shadow:0 5px 18px #183c2b30}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.2px}.brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff20;font-size:25px}
+nav{display:flex;gap:8px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;padding:9px 13px;border-radius:30px;font-size:.93rem}nav a:hover,nav a:focus{background:#ffffff25;outline:none}
+main{overflow:hidden}
+.hero{background:linear-gradient(180deg,#dcebd8 0%,#eff2df 65%,#fffaf0 100%);padding:64px 20px 50px;position:relative}
+.hero-inner{max-width:1120px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.eyebrow{color:var(--forest);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:.78rem}
+h1{font-size:clamp(2.5rem,5.5vw,4.7rem);line-height:1.02;color:var(--deep);margin:12px 0 18px;letter-spacing:-2px}
+.hero p{font-size:1.12rem;max-width:610px;color:#4b6150}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{border:0;border-radius:999px;padding:13px 21px;background:var(--forest);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 5px 12px #23433320;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{background:var(--deep);transform:translateY(-1px)}.btn.secondary{background:#fff;color:var(--forest);border:2px solid #c8d8c2;box-shadow:none}
+.hero-art{min-height:320px;border-radius:42% 58% 48% 52%;background:linear-gradient(145deg,#a8c69a,#d7e5b8);display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden}
+.hero-art:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#f4d98c;top:20px;right:25px;opacity:.75}
+.tree{position:relative;font-size:clamp(10rem,22vw,17rem);filter:drop-shadow(0 12px 6px #315b4620);z-index:1;line-height:1}
+.float{position:absolute;background:#fffdf2;border-radius:18px;padding:9px 13px;font-size:.9rem;font-weight:800;box-shadow:var(--shadow);z-index:2}
+.f1{top:22%;left:5%}.f2{bottom:17%;right:4%}.f3{bottom:8%;left:13%}
+.section{max-width:1120px;margin:auto;padding:64px 22px}
+.section-head{max-width:720px;margin-bottom:28px}.section h2{font-size:clamp(1.8rem,3vw,2.7rem);color:var(--deep);line-height:1.1;margin:7px 0 12px}.section-head p{color:var(--muted);font-size:1.04rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid #e8e8d9;border-radius:var(--radius);padding:23px;box-shadow:var(--shadow)}
+.card .emoji{font-size:2.2rem}.card h3{margin:10px 0 7px;color:var(--forest)}.card p{margin:0;color:var(--muted)}
+.note{background:#f4ead0;border-left:5px solid var(--gold);border-radius:14px;padding:16px 18px;color:#5c5036;margin-top:22px}
+.characters{background:#f0f4e9}
+.character{display:flex;gap:17px;align-items:flex-start}.avatar{width:76px;height:76px;flex:0 0 76px;border-radius:24px;background:#e4edda;display:grid;place-items:center;font-size:2.5rem}
+.character h3{margin:0 0 5px}.character p{font-size:.95rem}
+.tree-section{background:linear-gradient(180deg,#fffaf0,#edf3e5)}
+.memory-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center}
+.big-tree{background:#e5eedc;border-radius:32px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden}
+.big-tree span{font-size:13rem;filter:drop-shadow(0 8px 5px #315b4620)}
+.seed-list{display:grid;gap:12px}
+.seed{background:white;border:1px solid #e7e8d9;border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;color:var(--ink);width:100%;box-shadow:0 5px 14px #315b4610}
+.seed:hover,.seed:focus{border-color:var(--leaf);outline:3px solid #a8c69a55}
+.seed-icon{font-size:1.7rem}.seed strong{display:block;color:var(--forest)}.seed small{color:var(--muted)}
+.detail{margin-top:15px;padding:20px;background:#fff;border-radius:18px;border:1px solid #e7e8d9;min-height:120px}
+.detail h3{margin:0 0 5px;color:var(--forest)}.detail p{margin:0;color:var(--muted)}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.step{border-top:5px solid var(--leaf);background:white;padding:19px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+.step b{color:var(--forest);font-size:1.05rem}.step p{color:var(--muted);margin-bottom:0}
+.activity{background:#eaf1e4}
+.quiz{background:#fff;border-radius:24px;padding:25px;box-shadow:var(--shadow);max-width:760px}
+.question{font-size:1.2rem;font-weight:850;color:var(--deep);margin:0 0 15px}
+.choices{display:grid;gap:10px}.choice{border:2px solid #dce6d7;background:#fbfcf7;border-radius:14px;padding:13px 15px;text-align:left;cursor:pointer;color:var(--ink)}
+.choice:hover,.choice:focus{border-color:var(--leaf);outline:none}.choice.selected{background:#e7f1e2;border-color:var(--forest)}
+.feedback{min-height:30px;margin:14px 0 0;color:var(--forest);font-weight:700}
+.reflection{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.reflection input{flex:1;min-width:220px;border:2px solid #dce6d7;border-radius:14px;padding:13px;font:inherit}
+footer{background:var(--deep);color:#edf3e5;padding:35px 22px;text-align:center}footer p{max-width:760px;margin:8px auto;color:#d6e1d1;font-size:.9rem}
+footer a{color:#f6d98e}
+.smallprint{font-size:.85rem;color:var(--muted)}
+@media(max-width:760px){.hero-inner,.memory-layout{grid-template-columns:1fr}.hero{padding-top:42px}.hero-art{min-height:250px}.grid,.timeline{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}nav{gap:2px}nav a{padding:7px 9px;font-size:.85rem}.section{padding:48px 18px}.big-tree{min-height:230px}.big-tree span{font-size:9rem}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header>
+ <div class="nav">
+  <div class="brand"><span class="brand-mark">🌱</span><span>El Viaje de las Semillas</span></div>
+  <nav aria-label="Navegación principal">
+   <a href="#historia">La historia</a><a href="#personajes">Personajes</a><a href="#arbol">Árbol de recuerdos</a><a href="#actividad">Actividad</a>
+  </nav>
+ </div>
+</header>
+<main id="contenido">
+<section class="hero">
+ <div class="hero-inner">
+  <div>
+   <div class="eyebrow">Un espacio para aprender y recordar</div>
+   <h1>El árbol de<br>los recuerdos</h1>
+   <p>¡Hola! Acompaña a Kiti en un viaje por la vereda El Renacer. Escucha las historias de sus habitantes, descubre por qué es importante cuidar la memoria y aprende cómo la comunidad puede construir caminos de paz.</p>
+   <div class="actions">
+    <a class="btn" href="#historia">🌿 Comenzar el recorrido</a>
+    <a class="btn secondary" href="#arbol">Explorar los recuerdos</a>
+   </div>
+  </div>
+  <div class="hero-art" role="img" aria-label="Ilustración simbólica de un árbol frondoso">
+   <span class="tree">🌳</span><span class="float f1">Memoria</span><span class="float f2">Comunidad</span><span class="float f3">Esperanza</span>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="historia">
+ <div class="section-head"><div class="eyebrow">01 · Nuestra historia</div><h2>¿Por qué existe este árbol?</h2>
+ <p>En muchas regiones de Colombia, el conflicto armado cambió la vida de las familias y las comunidades. Algunas personas tuvieron que dejar sus hogares, sus escuelas y los lugares que conocían. Recordar estas historias nos ayuda a reconocer lo que ocurrió y a valorar el respeto, la solidaridad y la paz.</p></div>
+ <div class="grid">
+  <article class="card"><div class="emoji">🏡</div><h3>La vida en comunidad</h3><p>Las comunidades comparten lugares, recuerdos, trabajos, celebraciones y tradiciones que forman parte de su historia.</p></article>
+  <article class="card"><div class="emoji">🧳</div><h3>Cuando hay que partir</h3><p>El desplazamiento forzado ocurre cuando las personas deben abandonar su hogar por situaciones de violencia o amenazas.</p></article>
+  <article class="card"><div class="emoji">🌱</div><h3>Recordar y reconstruir</h3><p>La memoria permite escuchar a las comunidades, reconocer sus experiencias y aprender para construir un futuro sin violencia.</p></article>
+ </div>
+ <div class="note"><strong>Recuerda:</strong> el conflicto armado no fue un juego. En esta página usamos personajes imaginarios y símbolos para aprender con respeto sobre hechos reales que afectaron a muchas personas.</div>
+</section>
+
+<section class="section characters" id="personajes">
+ <div class="section-head"><div class="eyebrow">02 · Quienes nos acompañan</div><h2>Conoce a los personajes</h2><p>Estos personajes pertenecen a una historia ficticia creada para esta experiencia educativa. Nos ayudarán a explorar la memoria y la vida comunitaria.</p></div>
+ <div class="grid">
+  <article class="card character"><div class="avatar">👧🏽</div><div><h3>Kiti</h3><p>Es una niña curiosa que encuentra una flauta de bambú y emprende un viaje para recuperar las historias de su pueblo.</p></div></article>
+  <article class="card character"><div class="avatar">🧓🏽</div><div><h3>El Abuelo Sabedor</h3><p>Comparte recuerdos, canciones y conocimientos sobre las tradiciones de la comunidad.</p></div></article>
+  <article class="card character"><div class="avatar">🐦</div><div><h3>La Colibrí Mensajera</h3><p>Guía a Kiti por los caminos y la invita a observar, escuchar y hacer preguntas.</p></div></article>
+  <article class="card character"><div class="avatar">👩🏽‍🏫</div><div><h3>La Maestra del Pueblo</h3><p>Ayuda a comprender lo que sucede y recuerda que todas las niñas y los niños tienen derecho a aprender y estar protegidos.</p></div></article>
+  <article class="card character"><div class="avatar">🌫️</div><div><h3>La Bruma del Silencio</h3><p>Es un obstáculo simbólico que representa el olvido y la dificultad de escuchar las historias de los demás. No representa a una persona ni a un grupo real.</p></div></article>
+ </div>
+</section>
+
+<section class="section tree-section" id="arbol">
+ <div class="section-head"><div class="eyebrow">03 · Explora y descubre</div><h2>El árbol guarda muchas semillas</h2><p>Haz clic en cada semilla para descubrir una idea importante. Cada una nos recuerda algo que podemos aprender de la historia.</p></div>
+ <div class="memory-layout">
+  <div class="big-tree" aria-label="Árbol de los recuerdos"><span>🌳</span></div>
+  <div>
+   <div class="seed-list">
+    <button class="seed" data-title="Semilla de la memoria" data-copy="Recordar es escuchar y reconocer las experiencias de las personas y comunidades. Sus historias merecen respeto."><span class="seed-icon">🌰</span><span><strong>Semilla de la memoria</strong><small>Escuchar y recordar las historias.</small></span></button>
+    <button class="seed" data-title="Semilla de la comunidad" data-copy="Una comunidad se construye cuando las personas colaboran, cuidan los espacios compartidos y se ayudan unas a otras."><span class="seed-icon">🌻</span><span><strong>Semilla de la comunidad</strong><small>Cuidar los lugares que compartimos.</small></span></button>
+    <button class="seed" data-title="Semilla del respeto" data-copy="Escuchar sin burlarse, reconocer las diferencias y dialogar con tranquilidad ayuda a resolver desacuerdos sin violencia."><span class="seed-icon">🍃</span><span><strong>Semilla del respeto</strong><small>Escuchar y valorar a los demás.</small></span></button>
+    <button class="seed" data-title="Semilla de la paz" data-copy="La paz se construye con acciones cotidianas: dialogar, cuidar, compartir, respetar los derechos y rechazar la violencia."><span class="seed-icon">🌼</span><span><strong>Semilla de la paz</strong><small>Construir juntos un futuro mejor.</small></span></button>
+   </div>
+   <div class="detail" id="seed-detail" aria-live="polite"><h3>Elige una semilla</h3><p>Cuando selecciones una, aquí aparecerá su mensaje.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="recorrido">
+ <div class="section-head"><div class="eyebrow">04 · El viaje de Kiti</div><h2>Tres caminos para aprender</h2><p>La página acompaña los tres niveles del videojuego y amplía sus ideas principales.</p></div>
+ <div class="timeline">
+  <article class="step"><b>1. El Valle Silenciado</b><p>Kiti escucha los recuerdos de los habitantes y descubre por qué es importante conservar la memoria de la comunidad.</p></article>
+  <article class="step"><b>2. Los Caminos del Encuentro</b><p>Kiti acompaña a dos vecinos a escucharse y buscar una solución dialogada a un desacuerdo sobre el agua.</p></article>
+  <article class="step"><b>3. El Bosque Renacido</b><p>La comunidad se reúne para cuidar los espacios compartidos y sembrar nuevas semillas alrededor del Árbol de la Memoria.</p></article>
+ </div>
+</section>
+
+<section class="section activity" id="actividad">
+ <div class="section-head"><div class="eyebrow">05 · Piensa y participa</div><h2>Pequeño reto de memoria</h2><p>Lee la pregunta y elige la respuesta que te parezca correcta. ¡No hay afán: lo importante es pensar!</p></div>
+ <div class="quiz">
+  <p class="question">¿Por qué es importante escuchar las historias de las personas y las comunidades?</p>
+  <div class="choices" role="group" aria-label="Opciones de respuesta">
+   <button class="choice" data-correct="false">A. Porque todas las historias tienen que ser iguales.</button>
+   <button class="choice" data-correct="true">B. Porque nos ayudan a conocer el pasado y comprender lo que vivieron otras personas.</button>
+   <button class="choice" data-correct="false">C. Porque recordar significa olvidar lo que pasó.</button>
+  </div>
+  <p class="feedback" id="quiz-feedback" aria-live="polite">Selecciona una respuesta para continuar.</p>
+  <button class="btn secondary" id="reset-quiz" type="button">Volver a intentarlo</button>
+ </div>
+ <div class="section-head" style="margin-top:35px;margin-bottom:12px"><h2 style="font-size:1.55rem">Tu semilla para el futuro</h2><p>¿Qué acción ayuda a construir una comunidad donde todas las personas se sientan respetadas?</p></div>
+ <div class="reflection">
+  <input id="idea" type="text" maxlength="120" placeholder="Escribe tu idea aquí…" aria-label="Mi idea para construir comunidad">
+  <button class="btn" id="share-idea" type="button">Guardar mi idea</button>
+ </div>
+ <p class="feedback" id="idea-feedback" aria-live="polite"></p>
+</section>
+
+<section class="section">
+ <div class="section-head"><div class="eyebrow">Para seguir aprendiendo</div><h2>Historias reales, memoria y respeto</h2><p>Esta experiencia es una introducción. Si quieres conocer más sobre la historia de Colombia, puedes explorar materiales educativos elaborados por instituciones dedicadas a la memoria y la verdad.</p></div>
+ <div class="grid">
+  <article class="card"><h3>Centro Nacional de Memoria Histórica</h3><p>Consulta sus recursos pedagógicos y materiales sobre memoria histórica.</p><p style="margin-top:12px"><a href="https://centrodememoriahistorica.gov.co/" target="_blank" rel="noopener">Visitar el sitio ↗</a></p></article>
+  <article class="card"><h3>Comisión de la Verdad</h3><p>Explora recursos para conocer las experiencias de las comunidades y las afectaciones del conflicto.</p><p style="margin-top:12px"><a href="https://www.comisiondelaverdad.co/" target="_blank" rel="noopener">Visitar el sitio ↗</a></p></article>
+  <article class="card"><h3>Una conversación acompañada</h3><p>Si tienes preguntas o algo te preocupa, puedes conversar con tu docente o con un adulto de confianza.</p></article>
+ </div>
+ <p class="smallprint">Material educativo introductorio para niños y niñas. Se recomienda recorrerlo con el acompañamiento de una persona adulta o docente.</p>
+</section>
+</main>
+<footer>
+ <div style="font-size:2rem">🌳🌱</div>
+ <strong>El árbol de los recuerdos</strong>
+ <p>Una experiencia complementaria de «El Viaje de las Semillas» para acercarnos a la memoria, la comunidad y la construcción de paz.</p>
+ <p>Los personajes y la vereda El Renacer son ficticios. Los contenidos históricos deben trabajarse con fuentes confiables y acompañamiento pedagógico.</p>
+</footer>
+<script>
+document.querySelectorAll('.seed').forEach(button=>{
+ button.addEventListener('click',()=>{
+  document.querySelectorAll('.seed').forEach(b=>b.classList.remove('selected'));
+  button.classList.add('selected');
+  document.getElementById('seed-detail').innerHTML='<h3>'+button.dataset.title+'</h3><p>'+button.dataset.copy+'</p>';
+ });
+});
+document.querySelectorAll('.choice').forEach(button=>{
+ button.addEventListener('click',()=>{
+  document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
+  button.classList.add('selected');
+  const feedback=document.getElementById('quiz-feedback');
+  if(button.dataset.correct==='true'){
+   feedback.textContent='¡Muy bien! Escuchar las historias nos ayuda a comprender y respetar la memoria de las comunidades. 🌱';
+  }else{
+   feedback.textContent='¡Inténtalo otra vez! Piensa en cómo las historias nos ayudan a conocer lo que vivieron otras personas.';
+  }
+ });
+});
+document.getElementById('reset-quiz').addEventListener('click',()=>{
+ document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
+ document.getElementById('quiz-feedback').textContent='Selecciona una respuesta para continuar.';
+});
+document.getElementById('share-idea').addEventListener('click',()=>{
+ const value=document.getElementById('idea').value.trim();
+ const feedback=document.getElementById('idea-feedback');
+ if(!value){feedback.textContent='Primero escribe tu idea. ¡Queremos conocerla!';return;}
+ feedback.textContent='¡Gracias por compartir tu semilla! Tu idea: “'+value+'” 🌼';
+ document.getElementById('idea').value='';
+});
+</script>
+</body>
+</html>
