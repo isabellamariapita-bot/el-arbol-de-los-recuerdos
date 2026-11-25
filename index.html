@@ -70,11 +70,9 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .btn:hover{filter:brightness(1.07);transform:translateY(-2px)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .btn.secondary{background:#fff;color:var(--teja);border:2px solid #e3c7a8;box-shadow:none}
-.hero-art{min-height:340px;border-radius:42% 58% 48% 52%;display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden;border:6px solid #ffffff66}
-.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
-.scene .sun{transform-origin:300px 86px;animation:sunGlow 6s ease-in-out infinite}
-.hero-tree{transform-origin:157px 220px;animation:sway 5s ease-in-out infinite}
-@keyframes sunGlow{0%,100%{opacity:.85}50%{opacity:1}}
+.hero-art{min-height:340px;aspect-ratio:3/3.4;border-radius:42% 58% 48% 52%;position:relative;box-shadow:var(--shadow);overflow:hidden;border:6px solid #ffffff88}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;animation:floatPhoto 7s ease-in-out infinite}
+@keyframes floatPhoto{0%,100%{transform:scale(1.02)}50%{transform:scale(1.05)}}
 @keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
 .float{position:absolute;background:#fffdf2;border-radius:18px;padding:9px 13px;font-size:.9rem;font-weight:800;box-shadow:var(--shadow);z-index:2;color:var(--teja)}
 .float{animation:bob 4s ease-in-out infinite}
@@ -92,6 +90,9 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .note{background:#f8e7c2;border-left:5px solid var(--gold);border-radius:14px;padding:16px 18px;color:#5c4a2e;margin-top:22px}
 
 .characters{background:linear-gradient(180deg,#eef2e0,#e3ecd3)}
+.feature{margin:0 0 26px;background:#fffdf7;border:1px solid #ece0ca;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.feature img{display:block;width:100%;height:auto;max-height:420px;object-fit:cover;object-position:50% 30%}
+.feature figcaption{padding:16px 22px;color:var(--muted);font-size:1rem}
 .character{display:flex;gap:17px;align-items:flex-start}
 .avatar{width:76px;height:76px;flex:0 0 76px;border-radius:24px;background:linear-gradient(145deg,#e7ddc5,#d8e4c6);display:grid;place-items:center;font-size:2.5rem}
 .character h3{margin:0 0 5px}.character p{font-size:.97rem}
@@ -100,15 +101,8 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .memory-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center}
 .big-tree{background:linear-gradient(180deg,#d7e7bf,#c2d6a0);border-radius:32px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:inset 0 -40px 60px #8aa86a33;border:6px solid #ffffff66}
 .big-tree:after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,transparent,#9bbf6e55)}
-.big-tree span{font-size:13rem;filter:drop-shadow(0 8px 5px #4a351f26);position:relative;z-index:1}
-.memory-tree{width:82%;height:92%;position:relative;z-index:1;filter:drop-shadow(0 10px 8px #4a351f26)}
-.memory-tree .crown{transform-origin:160px 140px;animation:sway 6s ease-in-out infinite}
-.memory-tree .fruit{transform-origin:center;animation:twinkle 2.8s ease-in-out infinite}
-.memory-tree .fruit:nth-of-type(2){animation-delay:.5s}
-.memory-tree .fruit:nth-of-type(3){animation-delay:1s}
-.memory-tree .fruit:nth-of-type(4){animation-delay:1.5s}
-.memory-tree .fruit:nth-of-type(5){animation-delay:2s}
-@keyframes twinkle{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
+.tree-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;transition:transform .6s ease}
+.big-tree:hover .tree-photo{transform:scale(1.05)}
 .seed-list{display:grid;gap:12px}
 .seed{background:white;border:1px solid #e7e8d9;border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;color:var(--ink);width:100%;box-shadow:0 5px 14px #315b4610;transition:transform .12s ease,border-color .15s ease}
 .seed:hover{transform:translateY(-2px)}
@@ -204,54 +198,8 @@ footer a{color:#f6cf7e}
     <a class="btn secondary" href="#arbol">Explorar los recuerdos</a>
    </div>
   </div>
-  <div class="hero-art" role="img" aria-label="Ilustración de la vereda El Renacer al atardecer: montañas de selva, casas con techo de teja, un camino y un árbol frondoso">
-   <svg class="scene" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f7d79a"/><stop offset=".55" stop-color="#f0cf9a"/><stop offset="1" stop-color="#cfe0a8"/>
-     </linearGradient>
-     <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#9ebd6c"/><stop offset="1" stop-color="#7aa24f"/>
-     </linearGradient>
-     <radialGradient id="sung" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#fff3c8"/><stop offset=".6" stop-color="#f7cd6e"/><stop offset="1" stop-color="#f7cd6e00"/>
-     </radialGradient>
-    </defs>
-    <rect width="400" height="320" fill="url(#sky)"/>
-    <circle class="sun" cx="300" cy="86" r="62" fill="url(#sung)"/>
-    <!-- montañas de selva -->
-    <path d="M0 150 Q70 70 150 140 T300 130 T400 150 V210 H0 Z" fill="#6a9455" opacity=".55"/>
-    <path d="M0 175 Q90 110 180 165 T360 150 T400 175 V230 H0 Z" fill="#4d7a44" opacity=".7"/>
-    <!-- suelo -->
-    <rect y="205" width="400" height="115" fill="url(#ground)"/>
-    <!-- camino de tierra -->
-    <path d="M175 320 Q190 250 200 215 Q210 250 225 320 Z" fill="#c9a06a"/>
-    <!-- casa izquierda -->
-    <g>
-     <rect x="24" y="178" width="78" height="46" rx="3" fill="#e6d7bd"/>
-     <path d="M18 178 L63 150 L108 178 Z" fill="#a24f36"/>
-     <rect x="40" y="195" width="18" height="29" fill="#8a6a4a"/>
-     <rect x="70" y="192" width="18" height="15" fill="#b9d2e0"/>
-    </g>
-    <!-- casa derecha -->
-    <g>
-     <rect x="300" y="182" width="74" height="42" rx="3" fill="#e6d7bd"/>
-     <path d="M294 182 L337 156 L380 182 Z" fill="#a24f36"/>
-     <rect x="315" y="198" width="17" height="26" fill="#8a6a4a"/>
-     <rect x="345" y="195" width="16" height="14" fill="#b9d2e0"/>
-    </g>
-    <!-- árbol frondoso -->
-    <g class="hero-tree">
-     <rect x="150" y="150" width="14" height="70" rx="6" fill="#8a6a4a"/>
-     <circle cx="157" cy="138" r="40" fill="#5f8a4e"/>
-     <circle cx="128" cy="150" r="28" fill="#6fa05a"/>
-     <circle cx="186" cy="150" r="28" fill="#6fa05a"/>
-     <circle cx="157" cy="118" r="26" fill="#7aa860"/>
-    </g>
-    <!-- arbustos -->
-    <circle cx="20" cy="230" r="16" fill="#6fa05a"/>
-    <circle cx="385" cy="235" r="18" fill="#6fa05a"/>
-   </svg>
+  <div class="hero-art">
+   <img class="hero-photo" src="imagen-02.jpeg" alt="Kiti, una niña de la vereda El Renacer, sonríe sosteniendo su flauta de bambú en un camino rodeado de selva y casas de teja al atardecer" loading="eager" width="1728" height="2304">
    <span class="float f1">Memoria</span><span class="float f2">Comunidad</span><span class="float f3">Esperanza</span>
   </div>
  </div>
@@ -270,6 +218,10 @@ footer a{color:#f6cf7e}
 
 <section class="section characters" id="personajes">
  <div class="section-head"><div class="eyebrow">02 · Quienes nos acompañan</div><h2>Conoce a los personajes</h2><p>Estos personajes pertenecen a una historia ficticia creada para esta experiencia educativa. Nos ayudarán a explorar la memoria y la vida comunitaria.</p></div>
+ <figure class="feature">
+  <img src="imgen-01.jpg" alt="El Abuelo Sabedor sentado en el porche de madera de su casa, rodeado por un grupo de niñas y niños de la comunidad que lo escuchan sonrientes" loading="lazy" width="800" height="400">
+  <figcaption>El Abuelo Sabedor comparte sus recuerdos y canciones con las niñas y los niños de la vereda. Escuchar a quienes nos anteceden es la primera semilla de la memoria.</figcaption>
+ </figure>
  <div class="grid">
   <article class="card character"><div class="avatar">👧🏽</div><div><h3>Kiti</h3><p>Es una niña curiosa que encuentra una flauta de bambú y emprende un viaje para recuperar las historias de su pueblo.</p></div></article>
   <article class="card character"><div class="avatar">🧓🏽</div><div><h3>El Abuelo Sabedor</h3><p>Comparte recuerdos, canciones y conocimientos sobre las tradiciones de la comunidad.</p></div></article>
@@ -282,38 +234,8 @@ footer a{color:#f6cf7e}
 <section class="section tree-section" id="arbol">
  <div class="section-head"><div class="eyebrow">03 · Explora y descubre</div><h2>El árbol guarda muchas semillas</h2><p>Haz clic en cada semilla para descubrir una idea importante. Cada una nos recuerda algo que podemos aprender de la historia.</p></div>
  <div class="memory-layout">
-  <div class="big-tree" aria-label="Ilustración del árbol de los recuerdos">
-   <svg class="memory-tree" viewBox="0 0 320 340" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-    <defs>
-     <radialGradient id="crown" cx="50%" cy="40%" r="65%">
-      <stop offset="0" stop-color="#8fbf69"/><stop offset="1" stop-color="#4d7a44"/>
-     </radialGradient>
-     <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#9a7550"/><stop offset=".5" stop-color="#b08a5f"/><stop offset="1" stop-color="#7d5e3f"/>
-     </linearGradient>
-    </defs>
-    <!-- suelo/raíces -->
-    <ellipse cx="160" cy="312" rx="120" ry="18" fill="#7aa24f" opacity=".5"/>
-    <path d="M160 300 C120 304 110 312 86 316 M160 300 C200 304 212 312 236 316" stroke="#7d5e3f" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <!-- tronco con ramas -->
-    <path d="M146 312 L150 200 C150 180 134 170 120 150 M174 312 L170 200 C170 180 186 170 200 150" stroke="url(#trunk)" stroke-width="22" fill="none" stroke-linecap="round"/>
-    <rect x="146" y="150" width="28" height="165" rx="14" fill="url(#trunk)"/>
-    <!-- copa frondosa -->
-    <g class="crown">
-     <circle cx="160" cy="120" r="78" fill="url(#crown)"/>
-     <circle cx="96" cy="140" r="46" fill="#6fa05a"/>
-     <circle cx="224" cy="140" r="46" fill="#6fa05a"/>
-     <circle cx="160" cy="70" r="50" fill="#8fbf69"/>
-     <circle cx="120" cy="92" r="34" fill="#7aa860"/>
-     <circle cx="200" cy="92" r="34" fill="#7aa860"/>
-    </g>
-    <!-- semillas/frutos que brillan -->
-    <circle class="fruit" cx="118" cy="120" r="8" fill="#e0a53e"/>
-    <circle class="fruit" cx="196" cy="110" r="8" fill="#dd8a63"/>
-    <circle class="fruit" cx="160" cy="150" r="8" fill="#e8b84b"/>
-    <circle class="fruit" cx="150" cy="80" r="7" fill="#f1b24a"/>
-    <circle class="fruit" cx="205" cy="150" r="7" fill="#e0a53e"/>
-   </svg>
+  <div class="big-tree" aria-label="Fotografía de un gran árbol frondoso con el sol filtrándose entre sus ramas y raíces">
+   <img class="tree-photo" src="images-03.jpg" alt="Un gran árbol de tronco grueso y copa frondosa, con el sol del atardecer brillando entre sus ramas y raíces extendidas sobre la tierra" loading="lazy" width="640" height="480">
   </div>
   <div>
    <div class="seed-list">
