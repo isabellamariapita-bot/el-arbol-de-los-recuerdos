@@ -1,73 +1,122 @@
 <!DOCTYPE html>
-<html lang="es">https://github.com/isabellamariapita-bot/el-arbol-de-los-recuerdos/tree/main
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#315b46">
+<meta name="description" content="El árbol de los recuerdos: una experiencia educativa sobre memoria, comunidad y construcción de paz para niñas y niños.">
 <title>El árbol de los recuerdos | El Viaje de las Semillas</title>
+
+<!-- Fuentes web: Baloo 2 para títulos (redondeada y amable), Nunito para texto (legible) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
 <style>
 :root{
- --forest:#315b46;--deep:#234333;--leaf:#6f9367;--sage:#dce8d5;--cream:#fffaf0;
- --paper:#f6f1e5;--gold:#e5b95d;--ink:#34443a;--muted:#657368;--coral:#d98570;
- --shadow:0 14px 35px rgba(43,67,48,.12);--radius:24px
+ --forest:#2f6b4a;--deep:#1f4a34;--leaf:#6aa368;--sage:#dce8d5;--cream:#fffdf6;
+ --paper:#f6f1e5;--gold:#e8b84b;--ink:#2a3b30;--muted:#5d6f61;--coral:#e08a6f;
+ --ok:#2f8a52;--ok-bg:#e4f3e2;--bad:#c4573f;--bad-bg:#fbe6df;
+ --shadow:0 14px 35px rgba(43,67,48,.12);--radius:24px;
+ --font-head:"Baloo 2",ui-rounded,"Trebuchet MS",system-ui,sans-serif;
+ --font-body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;line-height:1.55}
-button,a{font:inherit}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);line-height:1.6;font-size:17px}
+h1,h2,h3,.brand,.question,.step b,.eyebrow,.btn{font-family:var(--font-head)}
+button,a,input{font-family:inherit}
 a{color:var(--forest)}
-.skip{position:absolute;left:-999px;top:8px;background:white;padding:10px;z-index:10}.skip:focus{left:8px}
-header{background:linear-gradient(120deg,#244b39,#527b58);color:#fff;padding:18px clamp(18px,5vw,70px);position:sticky;top:0;z-index:5;box-shadow:0 5px 18px #183c2b30}
-.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.2px}.brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff20;font-size:25px}
-nav{display:flex;gap:8px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;padding:9px 13px;border-radius:30px;font-size:.93rem}nav a:hover,nav a:focus{background:#ffffff25;outline:none}
+.skip{position:absolute;left:-999px;top:8px;background:white;padding:10px;z-index:10;border-radius:10px}.skip:focus{left:8px}
+
+header{background:linear-gradient(120deg,#244b39,#3f7a56);color:#fff;padding:16px clamp(18px,5vw,70px);position:sticky;top:0;z-index:5;box-shadow:0 5px 18px #183c2b30}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.2px;font-size:1.15rem}
+.brand-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff22;font-size:25px}
+nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav a{color:#fff;text-decoration:none;padding:9px 13px;border-radius:30px;font-size:.93rem;font-weight:700}
+nav a:hover,nav a:focus-visible{background:#ffffff2e;outline:none}
+.sound-toggle{border:0;background:#ffffff22;color:#fff;border-radius:30px;padding:9px 14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.sound-toggle:hover,.sound-toggle:focus-visible{background:#ffffff38;outline:none}
+
 main{overflow:hidden}
-.hero{background:linear-gradient(180deg,#dcebd8 0%,#eff2df 65%,#fffaf0 100%);padding:64px 20px 50px;position:relative}
+.hero{background:linear-gradient(180deg,#dcebd8 0%,#eff2df 65%,#fffdf6 100%);padding:64px 20px 50px;position:relative}
 .hero-inner{max-width:1120px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
-.eyebrow{color:var(--forest);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:.78rem}
-h1{font-size:clamp(2.5rem,5.5vw,4.7rem);line-height:1.02;color:var(--deep);margin:12px 0 18px;letter-spacing:-2px}
-.hero p{font-size:1.12rem;max-width:610px;color:#4b6150}
+.eyebrow{color:var(--forest);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margin:12px 0 18px;letter-spacing:-1px;font-weight:800}
+.hero p{font-size:1.14rem;max-width:610px;color:#42574a}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.btn{border:0;border-radius:999px;padding:13px 21px;background:var(--forest);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 5px 12px #23433320;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn:hover{background:var(--deep);transform:translateY(-1px)}.btn.secondary{background:#fff;color:var(--forest);border:2px solid #c8d8c2;box-shadow:none}
+.btn{border:0;border-radius:999px;padding:13px 22px;background:var(--forest);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 14px #23433330;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s ease,background .15s ease}
+.btn:hover{background:var(--deep);transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn.secondary{background:#fff;color:var(--forest);border:2px solid #bcd3b4;box-shadow:none}
 .hero-art{min-height:320px;border-radius:42% 58% 48% 52%;background:linear-gradient(145deg,#a8c69a,#d7e5b8);display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden}
 .hero-art:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#f4d98c;top:20px;right:25px;opacity:.75}
 .tree{position:relative;font-size:clamp(10rem,22vw,17rem);filter:drop-shadow(0 12px 6px #315b4620);z-index:1;line-height:1}
 .float{position:absolute;background:#fffdf2;border-radius:18px;padding:9px 13px;font-size:.9rem;font-weight:800;box-shadow:var(--shadow);z-index:2}
 .f1{top:22%;left:5%}.f2{bottom:17%;right:4%}.f3{bottom:8%;left:13%}
+
 .section{max-width:1120px;margin:auto;padding:64px 22px}
-.section-head{max-width:720px;margin-bottom:28px}.section h2{font-size:clamp(1.8rem,3vw,2.7rem);color:var(--deep);line-height:1.1;margin:7px 0 12px}.section-head p{color:var(--muted);font-size:1.04rem}
+.section-head{max-width:720px;margin-bottom:28px}
+.section h2{font-size:clamp(1.9rem,3vw,2.7rem);color:var(--deep);line-height:1.1;margin:7px 0 12px;font-weight:800}
+.section-head p{color:var(--muted);font-size:1.06rem}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:#fff;border:1px solid #e8e8d9;border-radius:var(--radius);padding:23px;box-shadow:var(--shadow)}
-.card .emoji{font-size:2.2rem}.card h3{margin:10px 0 7px;color:var(--forest)}.card p{margin:0;color:var(--muted)}
-.note{background:#f4ead0;border-left:5px solid var(--gold);border-radius:14px;padding:16px 18px;color:#5c5036;margin-top:22px}
+.card .emoji{font-size:2.2rem}.card h3{margin:10px 0 7px;color:var(--forest);font-weight:700}.card p{margin:0;color:var(--muted)}
+.note{background:#f8edcf;border-left:5px solid var(--gold);border-radius:14px;padding:16px 18px;color:#5c5036;margin-top:22px}
+
 .characters{background:#f0f4e9}
-.character{display:flex;gap:17px;align-items:flex-start}.avatar{width:76px;height:76px;flex:0 0 76px;border-radius:24px;background:#e4edda;display:grid;place-items:center;font-size:2.5rem}
-.character h3{margin:0 0 5px}.character p{font-size:.95rem}
-.tree-section{background:linear-gradient(180deg,#fffaf0,#edf3e5)}
+.character{display:flex;gap:17px;align-items:flex-start}
+.avatar{width:76px;height:76px;flex:0 0 76px;border-radius:24px;background:#e4edda;display:grid;place-items:center;font-size:2.5rem}
+.character h3{margin:0 0 5px}.character p{font-size:.97rem}
+
+.tree-section{background:linear-gradient(180deg,#fffdf6,#edf3e5)}
 .memory-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center}
 .big-tree{background:#e5eedc;border-radius:32px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden}
 .big-tree span{font-size:13rem;filter:drop-shadow(0 8px 5px #315b4620)}
 .seed-list{display:grid;gap:12px}
-.seed{background:white;border:1px solid #e7e8d9;border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;color:var(--ink);width:100%;box-shadow:0 5px 14px #315b4610}
-.seed:hover,.seed:focus{border-color:var(--leaf);outline:3px solid #a8c69a55}
+.seed{background:white;border:1px solid #e7e8d9;border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;color:var(--ink);width:100%;box-shadow:0 5px 14px #315b4610;transition:transform .12s ease,border-color .15s ease}
+.seed:hover{transform:translateY(-2px)}
+.seed:hover,.seed:focus-visible{border-color:var(--leaf);outline:none}
+.seed:focus-visible{outline:3px solid #a8c69a99}
+.seed.selected{border-color:var(--forest);background:#eef6ea}
 .seed-icon{font-size:1.7rem}.seed strong{display:block;color:var(--forest)}.seed small{color:var(--muted)}
 .detail{margin-top:15px;padding:20px;background:#fff;border-radius:18px;border:1px solid #e7e8d9;min-height:120px}
 .detail h3{margin:0 0 5px;color:var(--forest)}.detail p{margin:0;color:var(--muted)}
+
 .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
 .step{border-top:5px solid var(--leaf);background:white;padding:19px;border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
-.step b{color:var(--forest);font-size:1.05rem}.step p{color:var(--muted);margin-bottom:0}
+.step b{color:var(--forest);font-size:1.1rem}.step p{color:var(--muted);margin-bottom:0}
+
 .activity{background:#eaf1e4}
 .quiz{background:#fff;border-radius:24px;padding:25px;box-shadow:var(--shadow);max-width:760px}
-.question{font-size:1.2rem;font-weight:850;color:var(--deep);margin:0 0 15px}
-.choices{display:grid;gap:10px}.choice{border:2px solid #dce6d7;background:#fbfcf7;border-radius:14px;padding:13px 15px;text-align:left;cursor:pointer;color:var(--ink)}
-.choice:hover,.choice:focus{border-color:var(--leaf);outline:none}.choice.selected{background:#e7f1e2;border-color:var(--forest)}
-.feedback{min-height:30px;margin:14px 0 0;color:var(--forest);font-weight:700}
-.reflection{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.reflection input{flex:1;min-width:220px;border:2px solid #dce6d7;border-radius:14px;padding:13px;font:inherit}
-footer{background:var(--deep);color:#edf3e5;padding:35px 22px;text-align:center}footer p{max-width:760px;margin:8px auto;color:#d6e1d1;font-size:.9rem}
+.question{font-size:1.2rem;font-weight:700;color:var(--deep);margin:0 0 15px}
+.choices{display:grid;gap:10px}
+.choice{border:2px solid #dce6d7;background:#fbfcf7;border-radius:14px;padding:13px 15px;text-align:left;cursor:pointer;color:var(--ink);font-weight:600;transition:border-color .15s ease,background .15s ease}
+.choice:hover,.choice:focus-visible{border-color:var(--leaf);outline:none}
+.choice.selected{background:#e7f1e2;border-color:var(--forest)}
+.choice.correct{background:var(--ok-bg);border-color:var(--ok)}
+.choice.incorrect{background:var(--bad-bg);border-color:var(--bad)}
+.feedback{min-height:30px;margin:14px 0 0;font-weight:700}
+.feedback.ok{color:var(--ok)}.feedback.bad{color:var(--bad)}
+.reflection{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.reflection input{flex:1;min-width:220px;border:2px solid #dce6d7;border-radius:14px;padding:13px;font:inherit}
+.reflection input:focus-visible{outline:none;border-color:var(--forest)}
+
+footer{background:var(--deep);color:#edf3e5;padding:35px 22px;text-align:center}
+footer p{max-width:760px;margin:8px auto;color:#d6e1d1;font-size:.92rem}
 footer a{color:#f6d98e}
-.smallprint{font-size:.85rem;color:var(--muted)}
-@media(max-width:760px){.hero-inner,.memory-layout{grid-template-columns:1fr}.hero{padding-top:42px}.hero-art{min-height:250px}.grid,.timeline{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}nav{gap:2px}nav a{padding:7px 9px;font-size:.85rem}.section{padding:48px 18px}.big-tree{min-height:230px}.big-tree span{font-size:9rem}}
+.smallprint{font-size:.88rem;color:var(--muted)}
+
+@media(max-width:760px){
+ .hero-inner,.memory-layout{grid-template-columns:1fr}
+ .hero{padding-top:42px}.hero-art{min-height:250px}
+ .grid,.timeline{grid-template-columns:1fr}
+ .nav{align-items:flex-start;flex-direction:column}
+ nav{gap:2px}nav a{padding:7px 9px;font-size:.85rem}
+ .section{padding:48px 18px}.big-tree{min-height:230px}.big-tree span{font-size:9rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -76,7 +125,14 @@ footer a{color:#f6d98e}
  <div class="nav">
   <div class="brand"><span class="brand-mark">🌱</span><span>El Viaje de las Semillas</span></div>
   <nav aria-label="Navegación principal">
-   <a href="#historia">La historia</a><a href="#personajes">Personajes</a><a href="#arbol">Árbol de recuerdos</a><a href="#actividad">Actividad</a>
+   <a href="#historia">La historia</a>
+   <a href="#personajes">Personajes</a>
+   <a href="#arbol">Árbol de recuerdos</a>
+   <a href="#actividad">Actividad</a>
+   <a href="#decisiones-kiti">Decisiones</a>
+   <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true" title="Activar o silenciar los sonidos">
+     <span id="sound-icon">🔊</span><span id="sound-label">Sonido</span>
+   </button>
   </nav>
  </div>
 </header>
@@ -165,6 +221,44 @@ footer a{color:#f6d98e}
  <p class="feedback" id="idea-feedback" aria-live="polite"></p>
 </section>
 
+<section class="section activity" id="decisiones-kiti">
+ <div class="section-head">
+  <div class="eyebrow">06 · Actividad interactiva</div>
+  <h2>Las decisiones de Kiti</h2>
+  <p>¡Ayuda a Kiti a tomar decisiones! Lee cada situación y selecciona la respuesta que ayude a construir una comunidad basada en la memoria, el respeto y la solidaridad.</p>
+ </div>
+
+ <div class="quiz" style="margin-bottom:18px">
+  <p class="question">1. Dos vecinos están discutiendo porque ambos necesitan agua para sus cultivos. ¿Qué debería hacer Kiti?</p>
+  <div class="choices" role="group" aria-label="Opciones de la pregunta 1">
+   <button class="choice decision" data-correct="false">A. Decirles que dejen de hablarse.</button>
+   <button class="choice decision" data-correct="true">B. Invitarlos a escucharse y buscar juntos una solución.</button>
+   <button class="choice decision" data-correct="false">C. Ignorar el problema y continuar su camino.</button>
+  </div>
+  <p class="feedback decision-feedback" aria-live="polite"></p>
+ </div>
+
+ <div class="quiz" style="margin-bottom:18px">
+  <p class="question">2. El Abuelo Sabedor quiere contarle a Kiti una historia de su infancia. ¿Qué debería hacer ella?</p>
+  <div class="choices" role="group" aria-label="Opciones de la pregunta 2">
+   <button class="choice decision" data-correct="true">A. Escucharlo con atención y hacerle preguntas.</button>
+   <button class="choice decision" data-correct="false">B. Interrumpirlo porque la historia es muy larga.</button>
+   <button class="choice decision" data-correct="false">C. Decirle que los recuerdos no son importantes.</button>
+  </div>
+  <p class="feedback decision-feedback" aria-live="polite"></p>
+ </div>
+
+ <div class="quiz">
+  <p class="question">3. Kiti descubre que el parque de la vereda está descuidado. ¿Qué puede hacer la comunidad?</p>
+  <div class="choices" role="group" aria-label="Opciones de la pregunta 3">
+   <button class="choice decision" data-correct="false">A. Esperar a que alguien más lo arregle.</button>
+   <button class="choice decision" data-correct="false">B. Evitar utilizar el parque para siempre.</button>
+   <button class="choice decision" data-correct="true">C. Organizarse para limpiar y cuidar el espacio entre todos.</button>
+  </div>
+  <p class="feedback decision-feedback" aria-live="polite"></p>
+ </div>
+</section>
+
 <section class="section">
  <div class="section-head"><div class="eyebrow">Para seguir aprendiendo</div><h2>Historias reales, memoria y respeto</h2><p>Esta experiencia es una introducción. Si quieres conocer más sobre la historia de Colombia, puedes explorar materiales educativos elaborados por instituciones dedicadas a la memoria y la verdad.</p></div>
  <div class="grid">
@@ -181,125 +275,134 @@ footer a{color:#f6d98e}
  <p>Una experiencia complementaria de «El Viaje de las Semillas» para acercarnos a la memoria, la comunidad y la construcción de paz.</p>
  <p>Los personajes y la vereda El Renacer son ficticios. Los contenidos históricos deben trabajarse con fuentes confiables y acompañamiento pedagógico.</p>
 </footer>
+
 <script>
+/* ===== Sonido suave con Web Audio API (sin archivos externos) ===== */
+const Sound = (()=>{
+ let ctx=null;
+ let enabled=localStorage.getItem('eadr-sound')!=='off';
+ function ac(){
+  if(!ctx){const C=window.AudioContext||window.webkitAudioContext; if(C) ctx=new C();}
+  if(ctx&&ctx.state==='suspended') ctx.resume();
+  return ctx;
+ }
+ // Reproduce una nota tipo campana/marimba, suave
+ function note(freq,start,dur,gain){
+  const c=ac(); if(!c) return;
+  const t=c.currentTime+start;
+  const osc=c.createOscillator();
+  const g=c.createGain();
+  osc.type='sine';
+  osc.frequency.value=freq;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(gain,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  osc.connect(g).connect(c.destination);
+  osc.start(t);osc.stop(t+dur+0.05);
+ }
+ function play(seq){ if(!enabled) return; seq.forEach(n=>note(n.f,n.t||0,n.d||0.25,n.g||0.14)); }
+ return {
+  // Sonidos semánticos
+  tap(){ play([{f:523.25,d:0.18,g:0.10}]); },                                   // clic suave
+  select(){ play([{f:587.33,d:0.2},{f:880,t:0.06,d:0.25}]); },                   // seleccionar semilla
+  success(){ play([{f:523.25,d:0.22},{f:659.25,t:0.1,d:0.22},{f:783.99,t:0.2,d:0.35}]); }, // acierto (do-mi-sol)
+  error(){ play([{f:329.63,d:0.22,g:0.12},{f:246.94,t:0.12,d:0.3,g:0.12}]); },   // error (descendente, no estridente)
+  save(){ play([{f:659.25,d:0.2},{f:987.77,t:0.09,d:0.3}]); },                   // guardar idea
+  get enabled(){return enabled;},
+  toggle(){
+   enabled=!enabled;
+   localStorage.setItem('eadr-sound',enabled?'on':'off');
+   if(enabled) this.tap();
+   return enabled;
+  }
+ };
+})();
+
+/* ===== Botón de sonido ===== */
+(function(){
+ const btn=document.getElementById('sound-toggle');
+ const icon=document.getElementById('sound-icon');
+ const label=document.getElementById('sound-label');
+ function render(){
+  const on=Sound.enabled;
+  icon.textContent=on?'🔊':'🔇';
+  label.textContent=on?'Sonido':'Silencio';
+  btn.setAttribute('aria-pressed',String(on));
+ }
+ btn.addEventListener('click',()=>{Sound.toggle();render();});
+ render();
+})();
+
+/* ===== Semillas ===== */
 document.querySelectorAll('.seed').forEach(button=>{
  button.addEventListener('click',()=>{
   document.querySelectorAll('.seed').forEach(b=>b.classList.remove('selected'));
   button.classList.add('selected');
   document.getElementById('seed-detail').innerHTML='<h3>'+button.dataset.title+'</h3><p>'+button.dataset.copy+'</p>';
+  Sound.select();
  });
 });
-document.querySelectorAll('.choice').forEach(button=>{
+
+/* ===== Quiz principal ===== */
+document.querySelectorAll('#actividad .choices .choice').forEach(button=>{
  button.addEventListener('click',()=>{
-  document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
-  button.classList.add('selected');
   const feedback=document.getElementById('quiz-feedback');
+  document.querySelectorAll('#actividad .choices .choice').forEach(b=>b.classList.remove('selected','correct','incorrect'));
+  button.classList.add('selected');
   if(button.dataset.correct==='true'){
+   button.classList.add('correct');
    feedback.textContent='¡Muy bien! Escuchar las historias nos ayuda a comprender y respetar la memoria de las comunidades. 🌱';
+   feedback.className='feedback ok';
+   Sound.success();
   }else{
+   button.classList.add('incorrect');
    feedback.textContent='¡Inténtalo otra vez! Piensa en cómo las historias nos ayudan a conocer lo que vivieron otras personas.';
+   feedback.className='feedback bad';
+   Sound.error();
   }
  });
 });
 document.getElementById('reset-quiz').addEventListener('click',()=>{
- document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
- document.getElementById('quiz-feedback').textContent='Selecciona una respuesta para continuar.';
+ document.querySelectorAll('#actividad .choices .choice').forEach(b=>b.classList.remove('selected','correct','incorrect'));
+ const f=document.getElementById('quiz-feedback');
+ f.textContent='Selecciona una respuesta para continuar.';
+ f.className='feedback';
+ Sound.tap();
 });
+
+/* ===== Guardar idea ===== */
 document.getElementById('share-idea').addEventListener('click',()=>{
  const value=document.getElementById('idea').value.trim();
  const feedback=document.getElementById('idea-feedback');
- if(!value){feedback.textContent='Primero escribe tu idea. ¡Queremos conocerla!';return;}
+ if(!value){feedback.textContent='Primero escribe tu idea. ¡Queremos conocerla!';feedback.className='feedback bad';Sound.error();return;}
  feedback.textContent='¡Gracias por compartir tu semilla! Tu idea: “'+value+'” 🌼';
+ feedback.className='feedback ok';
  document.getElementById('idea').value='';
+ Sound.save();
+});
+
+/* ===== Quiz de decisiones de Kiti ===== */
+document.querySelectorAll('#decisiones-kiti .quiz').forEach(quiz=>{
+ const buttons=quiz.querySelectorAll('.decision');
+ const feedback=quiz.querySelector('.decision-feedback');
+ buttons.forEach(button=>{
+  button.addEventListener('click',()=>{
+   buttons.forEach(b=>b.classList.remove('selected','correct','incorrect'));
+   button.classList.add('selected');
+   if(button.dataset.correct==='true'){
+    button.classList.add('correct');
+    feedback.textContent='¡Excelente! 🌱 Esa decisión ayuda a construir una comunidad basada en el respeto y la solidaridad.';
+    feedback.className='feedback decision-feedback ok';
+    Sound.success();
+   }else{
+    button.classList.add('incorrect');
+    feedback.textContent='¡Inténtalo de nuevo! Piensa en cómo Kiti puede ayudar a los demás.';
+    feedback.className='feedback decision-feedback bad';
+    Sound.error();
+   }
+  });
+ });
 });
 </script>
 </body>
-<section id="decisiones-kiti">
-  <div class="section-head">
-    <div class="eyebrow">Actividad interactiva</div>
-    <h2>Las decisiones de Kiti</h2>
-    <p>¡Ayuda a Kiti a tomar decisiones! Lee cada situación y selecciona la respuesta que ayude a construir una comunidad basada en la memoria, el respeto y la solidaridad.</p>
-  </div>
-
-  <div class="quiz">
-    <p class="question">1. Dos vecinos están discutiendo porque ambos necesitan agua para sus cultivos. ¿Qué debería hacer Kiti?</p>
-    <button class="decision" data-correct="false">A. Decirles que dejen de hablarse.</button>
-    <button class="decision" data-correct="true">B. Invitarlos a escucharse y buscar juntos una solución.</button>
-    <button class="decision" data-correct="false">C. Ignorar el problema y continuar su camino.</button>
-    <p class="decision-feedback"></p>
-  </div>
-
-  <div class="quiz">
-    <p class="question">2. El Abuelo Sabedor quiere contarle a Kiti una historia de su infancia. ¿Qué debería hacer ella?</p>
-    <button class="decision" data-correct="true">A. Escucharlo con atención y hacerle preguntas.</button>
-    <button class="decision" data-correct="false">B. Interrumpirlo porque la historia es muy larga.</button>
-    <button class="decision" data-correct="false">C. Decirle que los recuerdos no son importantes.</button>
-    <p class="decision-feedback"></p>
-  </div>
-
-  <div class="quiz">
-    <p class="question">3. Kiti descubre que el parque de la vereda está descuidado. ¿Qué puede hacer la comunidad?</p>
-    <button class="decision" data-correct="false">A. Esperar a que alguien más lo arregle.</button>
-    <button class="decision" data-correct="false">B. Evitar utilizar el parque para siempre.</button>
-    <button class="decision" data-correct="true">C. Organizarse para limpiar y cuidar el espacio entre todos.</button>
-    <p class="decision-feedback"></p>
-  </div>
-</section>
-
-<style>
-#decisiones-kiti {
-  margin-top: 50px;
-}
-#decisiones-kiti .quiz {
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 15px;
-  background: #f4f0e5;
-}
-#decisiones-kiti .question {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-#decisiones-kiti .decision {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #b8a77d;
-  border-radius: 10px;
-  background: white;
-  color: #333;
-  text-align: left;
-  cursor: pointer;
-}
-#decisiones-kiti .decision:hover {
-  background: #e7efd9;
-}
-#decisiones-kiti .decision-feedback {
-  font-weight: bold;
-  margin-top: 12px;
-}
-</style>
-
-<script>
-document.querySelectorAll('#decisiones-kiti .quiz').forEach(quiz => {
-  const buttons = quiz.querySelectorAll('.decision');
-  const feedback = quiz.querySelector('.decision-feedback');
-
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      buttons.forEach(b => b.style.background = 'white');
-
-      if (button.dataset.correct === 'true') {
-        button.style.background = '#d9edcf';
-        feedback.textContent = '¡Excelente! 🌱 Esa decisión ayuda a construir una comunidad basada en el respeto y la solidaridad.';
-      } else {
-        button.style.background = '#f5d8d3';
-        feedback.textContent = '¡Inténtalo de nuevo! Piensa en cómo Kiti puede ayudar a los demás.';
-      }
-    });
-  });
-});
-</script>
-
 </html>
