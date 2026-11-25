@@ -70,10 +70,16 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .btn:hover{filter:brightness(1.07);transform:translateY(-2px)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .btn.secondary{background:#fff;color:var(--teja);border:2px solid #e3c7a8;box-shadow:none}
-.hero-art{min-height:320px;border-radius:42% 58% 48% 52%;background:linear-gradient(160deg,#8fb56a,#c9dd9a 55%,#eadf9f);display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden;border:6px solid #ffffff55}
-.hero-art:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#fbe5a0,#f3c766);top:20px;right:25px;opacity:.8}
-.tree{position:relative;font-size:clamp(10rem,22vw,17rem);filter:drop-shadow(0 12px 6px #4a351f33);z-index:1;line-height:1}
+.hero-art{min-height:340px;border-radius:42% 58% 48% 52%;display:grid;place-items:center;position:relative;box-shadow:var(--shadow);overflow:hidden;border:6px solid #ffffff66}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene .sun{transform-origin:300px 86px;animation:sunGlow 6s ease-in-out infinite}
+.hero-tree{transform-origin:157px 220px;animation:sway 5s ease-in-out infinite}
+@keyframes sunGlow{0%,100%{opacity:.85}50%{opacity:1}}
+@keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
 .float{position:absolute;background:#fffdf2;border-radius:18px;padding:9px 13px;font-size:.9rem;font-weight:800;box-shadow:var(--shadow);z-index:2;color:var(--teja)}
+.float{animation:bob 4s ease-in-out infinite}
+.f2{animation-delay:.8s}.f3{animation-delay:1.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .f1{top:22%;left:5%}.f2{bottom:17%;right:4%}.f3{bottom:8%;left:13%}
 
 .section{max-width:1120px;margin:auto;padding:64px 22px}
@@ -95,6 +101,14 @@ h1{font-size:clamp(2.5rem,5.5vw,4.6rem);line-height:1.02;color:var(--deep);margi
 .big-tree{background:linear-gradient(180deg,#d7e7bf,#c2d6a0);border-radius:32px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:inset 0 -40px 60px #8aa86a33;border:6px solid #ffffff66}
 .big-tree:after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,transparent,#9bbf6e55)}
 .big-tree span{font-size:13rem;filter:drop-shadow(0 8px 5px #4a351f26);position:relative;z-index:1}
+.memory-tree{width:82%;height:92%;position:relative;z-index:1;filter:drop-shadow(0 10px 8px #4a351f26)}
+.memory-tree .crown{transform-origin:160px 140px;animation:sway 6s ease-in-out infinite}
+.memory-tree .fruit{transform-origin:center;animation:twinkle 2.8s ease-in-out infinite}
+.memory-tree .fruit:nth-of-type(2){animation-delay:.5s}
+.memory-tree .fruit:nth-of-type(3){animation-delay:1s}
+.memory-tree .fruit:nth-of-type(4){animation-delay:1.5s}
+.memory-tree .fruit:nth-of-type(5){animation-delay:2s}
+@keyframes twinkle{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
 .seed-list{display:grid;gap:12px}
 .seed{background:white;border:1px solid #e7e8d9;border-radius:17px;padding:15px 17px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;color:var(--ink);width:100%;box-shadow:0 5px 14px #315b4610;transition:transform .12s ease,border-color .15s ease}
 .seed:hover{transform:translateY(-2px)}
@@ -150,7 +164,14 @@ footer a{color:#f6cf7e}
  .podcast{grid-template-columns:1fr;text-align:center;justify-items:center}
  .podcast .controls{justify-content:center}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+/* Aparición suave al entrar en pantalla */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+ *{transition:none!important;animation:none!important}
+ html{scroll-behavior:auto}
+ .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
@@ -183,8 +204,55 @@ footer a{color:#f6cf7e}
     <a class="btn secondary" href="#arbol">Explorar los recuerdos</a>
    </div>
   </div>
-  <div class="hero-art" role="img" aria-label="Ilustración simbólica de un árbol frondoso">
-   <span class="tree">🌳</span><span class="float f1">Memoria</span><span class="float f2">Comunidad</span><span class="float f3">Esperanza</span>
+  <div class="hero-art" role="img" aria-label="Ilustración de la vereda El Renacer al atardecer: montañas de selva, casas con techo de teja, un camino y un árbol frondoso">
+   <svg class="scene" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7d79a"/><stop offset=".55" stop-color="#f0cf9a"/><stop offset="1" stop-color="#cfe0a8"/>
+     </linearGradient>
+     <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9ebd6c"/><stop offset="1" stop-color="#7aa24f"/>
+     </linearGradient>
+     <radialGradient id="sung" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff3c8"/><stop offset=".6" stop-color="#f7cd6e"/><stop offset="1" stop-color="#f7cd6e00"/>
+     </radialGradient>
+    </defs>
+    <rect width="400" height="320" fill="url(#sky)"/>
+    <circle class="sun" cx="300" cy="86" r="62" fill="url(#sung)"/>
+    <!-- montañas de selva -->
+    <path d="M0 150 Q70 70 150 140 T300 130 T400 150 V210 H0 Z" fill="#6a9455" opacity=".55"/>
+    <path d="M0 175 Q90 110 180 165 T360 150 T400 175 V230 H0 Z" fill="#4d7a44" opacity=".7"/>
+    <!-- suelo -->
+    <rect y="205" width="400" height="115" fill="url(#ground)"/>
+    <!-- camino de tierra -->
+    <path d="M175 320 Q190 250 200 215 Q210 250 225 320 Z" fill="#c9a06a"/>
+    <!-- casa izquierda -->
+    <g>
+     <rect x="24" y="178" width="78" height="46" rx="3" fill="#e6d7bd"/>
+     <path d="M18 178 L63 150 L108 178 Z" fill="#a24f36"/>
+     <rect x="40" y="195" width="18" height="29" fill="#8a6a4a"/>
+     <rect x="70" y="192" width="18" height="15" fill="#b9d2e0"/>
+    </g>
+    <!-- casa derecha -->
+    <g>
+     <rect x="300" y="182" width="74" height="42" rx="3" fill="#e6d7bd"/>
+     <path d="M294 182 L337 156 L380 182 Z" fill="#a24f36"/>
+     <rect x="315" y="198" width="17" height="26" fill="#8a6a4a"/>
+     <rect x="345" y="195" width="16" height="14" fill="#b9d2e0"/>
+    </g>
+    <!-- árbol frondoso -->
+    <g class="hero-tree">
+     <rect x="150" y="150" width="14" height="70" rx="6" fill="#8a6a4a"/>
+     <circle cx="157" cy="138" r="40" fill="#5f8a4e"/>
+     <circle cx="128" cy="150" r="28" fill="#6fa05a"/>
+     <circle cx="186" cy="150" r="28" fill="#6fa05a"/>
+     <circle cx="157" cy="118" r="26" fill="#7aa860"/>
+    </g>
+    <!-- arbustos -->
+    <circle cx="20" cy="230" r="16" fill="#6fa05a"/>
+    <circle cx="385" cy="235" r="18" fill="#6fa05a"/>
+   </svg>
+   <span class="float f1">Memoria</span><span class="float f2">Comunidad</span><span class="float f3">Esperanza</span>
   </div>
  </div>
 </section>
@@ -214,7 +282,39 @@ footer a{color:#f6cf7e}
 <section class="section tree-section" id="arbol">
  <div class="section-head"><div class="eyebrow">03 · Explora y descubre</div><h2>El árbol guarda muchas semillas</h2><p>Haz clic en cada semilla para descubrir una idea importante. Cada una nos recuerda algo que podemos aprender de la historia.</p></div>
  <div class="memory-layout">
-  <div class="big-tree" aria-label="Árbol de los recuerdos"><span>🌳</span></div>
+  <div class="big-tree" aria-label="Ilustración del árbol de los recuerdos">
+   <svg class="memory-tree" viewBox="0 0 320 340" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <defs>
+     <radialGradient id="crown" cx="50%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#8fbf69"/><stop offset="1" stop-color="#4d7a44"/>
+     </radialGradient>
+     <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a7550"/><stop offset=".5" stop-color="#b08a5f"/><stop offset="1" stop-color="#7d5e3f"/>
+     </linearGradient>
+    </defs>
+    <!-- suelo/raíces -->
+    <ellipse cx="160" cy="312" rx="120" ry="18" fill="#7aa24f" opacity=".5"/>
+    <path d="M160 300 C120 304 110 312 86 316 M160 300 C200 304 212 312 236 316" stroke="#7d5e3f" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <!-- tronco con ramas -->
+    <path d="M146 312 L150 200 C150 180 134 170 120 150 M174 312 L170 200 C170 180 186 170 200 150" stroke="url(#trunk)" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <rect x="146" y="150" width="28" height="165" rx="14" fill="url(#trunk)"/>
+    <!-- copa frondosa -->
+    <g class="crown">
+     <circle cx="160" cy="120" r="78" fill="url(#crown)"/>
+     <circle cx="96" cy="140" r="46" fill="#6fa05a"/>
+     <circle cx="224" cy="140" r="46" fill="#6fa05a"/>
+     <circle cx="160" cy="70" r="50" fill="#8fbf69"/>
+     <circle cx="120" cy="92" r="34" fill="#7aa860"/>
+     <circle cx="200" cy="92" r="34" fill="#7aa860"/>
+    </g>
+    <!-- semillas/frutos que brillan -->
+    <circle class="fruit" cx="118" cy="120" r="8" fill="#e0a53e"/>
+    <circle class="fruit" cx="196" cy="110" r="8" fill="#dd8a63"/>
+    <circle class="fruit" cx="160" cy="150" r="8" fill="#e8b84b"/>
+    <circle class="fruit" cx="150" cy="80" r="7" fill="#f1b24a"/>
+    <circle class="fruit" cx="205" cy="150" r="7" fill="#e0a53e"/>
+   </svg>
+  </div>
   <div>
    <div class="seed-list">
     <button class="seed" data-title="Semilla de la memoria" data-copy="Recordar es escuchar y reconocer las experiencias de las personas y comunidades. Sus historias merecen respeto."><span class="seed-icon">🌰</span><span><strong>Semilla de la memoria</strong><small>Escuchar y recordar las historias.</small></span></button>
@@ -476,6 +576,17 @@ document.querySelectorAll('#decisiones-kiti .quiz').forEach(quiz=>{
  audio.addEventListener('pause',render);
  audio.addEventListener('ended',render);
  render();
+})();
+
+/* ===== Aparición suave de secciones al hacer scroll ===== */
+(function(){
+ const items=document.querySelectorAll('.card, .step, .quiz, .seed, .podcast, .note');
+ items.forEach(el=>el.classList.add('reveal'));
+ if(!('IntersectionObserver'in window)){items.forEach(el=>el.classList.add('in'));return;}
+ const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+ },{threshold:.12});
+ items.forEach(el=>io.observe(el));
 })();
 </script>
 </body>
