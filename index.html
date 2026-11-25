@@ -214,4 +214,92 @@ document.getElementById('share-idea').addEventListener('click',()=>{
 });
 </script>
 </body>
+<section id="decisiones-kiti">
+  <div class="section-head">
+    <div class="eyebrow">Actividad interactiva</div>
+    <h2>Las decisiones de Kiti</h2>
+    <p>¡Ayuda a Kiti a tomar decisiones! Lee cada situación y selecciona la respuesta que ayude a construir una comunidad basada en la memoria, el respeto y la solidaridad.</p>
+  </div>
+
+  <div class="quiz">
+    <p class="question">1. Dos vecinos están discutiendo porque ambos necesitan agua para sus cultivos. ¿Qué debería hacer Kiti?</p>
+    <button class="decision" data-correct="false">A. Decirles que dejen de hablarse.</button>
+    <button class="decision" data-correct="true">B. Invitarlos a escucharse y buscar juntos una solución.</button>
+    <button class="decision" data-correct="false">C. Ignorar el problema y continuar su camino.</button>
+    <p class="decision-feedback"></p>
+  </div>
+
+  <div class="quiz">
+    <p class="question">2. El Abuelo Sabedor quiere contarle a Kiti una historia de su infancia. ¿Qué debería hacer ella?</p>
+    <button class="decision" data-correct="true">A. Escucharlo con atención y hacerle preguntas.</button>
+    <button class="decision" data-correct="false">B. Interrumpirlo porque la historia es muy larga.</button>
+    <button class="decision" data-correct="false">C. Decirle que los recuerdos no son importantes.</button>
+    <p class="decision-feedback"></p>
+  </div>
+
+  <div class="quiz">
+    <p class="question">3. Kiti descubre que el parque de la vereda está descuidado. ¿Qué puede hacer la comunidad?</p>
+    <button class="decision" data-correct="false">A. Esperar a que alguien más lo arregle.</button>
+    <button class="decision" data-correct="false">B. Evitar utilizar el parque para siempre.</button>
+    <button class="decision" data-correct="true">C. Organizarse para limpiar y cuidar el espacio entre todos.</button>
+    <p class="decision-feedback"></p>
+  </div>
+</section>
+
+<style>
+#decisiones-kiti {
+  margin-top: 50px;
+}
+#decisiones-kiti .quiz {
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 15px;
+  background: #f4f0e5;
+}
+#decisiones-kiti .question {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+#decisiones-kiti .decision {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #b8a77d;
+  border-radius: 10px;
+  background: white;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+}
+#decisiones-kiti .decision:hover {
+  background: #e7efd9;
+}
+#decisiones-kiti .decision-feedback {
+  font-weight: bold;
+  margin-top: 12px;
+}
+</style>
+
+<script>
+document.querySelectorAll('#decisiones-kiti .quiz').forEach(quiz => {
+  const buttons = quiz.querySelectorAll('.decision');
+  const feedback = quiz.querySelector('.decision-feedback');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(b => b.style.background = 'white');
+
+      if (button.dataset.correct === 'true') {
+        button.style.background = '#d9edcf';
+        feedback.textContent = '¡Excelente! 🌱 Esa decisión ayuda a construir una comunidad basada en el respeto y la solidaridad.';
+      } else {
+        button.style.background = '#f5d8d3';
+        feedback.textContent = '¡Inténtalo de nuevo! Piensa en cómo Kiti puede ayudar a los demás.';
+      }
+    });
+  });
+});
+</script>
+
 </html>
